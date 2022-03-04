@@ -52,13 +52,14 @@ public class Cars extends CarSystem {
     }
 
     public void display() {
-        System.out.println("Producer: " + getProducer());
-        System.out.println("Name: " + getName());
-        System.out.println("Type: " + getCarType());
-        System.out.println("Production year: " + getProductionYear());
-        System.out.println("Mileage: " + getMilage());
-        System.out.println("Date start of Mileage: " + getMilageDate());
-        System.out.println("---------------------------");
+        System.out.println("\t" + "\t" + "Produsent: " + getProducer());
+        System.out.println("\t" + "\t" + "Navn: " + getName());
+        System.out.println("\t" + "\t"+ "Type: " + getCarType());
+        System.out.println("\t" + "\t" + "Produksjons år: " + getProductionYear());
+        System.out.println("\t" + "\t" + "Distanse: " + getMilage());
+        System.out.println("\t" + "\t" + "Dato når distanse startet: " + getMilageDate());
+        System.out.println(" ");
+
     }
 }
 

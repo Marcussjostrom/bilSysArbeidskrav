@@ -1,6 +1,7 @@
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import javax.annotation.processing.SupportedAnnotationTypes;
+import java.util.*;
+import java.util.stream.Stream;
+import java.util.NoSuchElementException;
 
 public class CarSystem {
 
@@ -23,8 +24,67 @@ public class CarSystem {
         personList.addAll(List.of(new Person[]{person1, person2, person3, person4}));
 
         Cars car1 = new Cars("Dacia", "1300", 1964, 450000, "05-07-1968", "Personbil", person1);
+        Cars car2 = new Cars("Ford", "Raptor", 2017, 150000, "05-09-2017", "Pickup", person2);
+        Cars car3 = new Cars("Volkswagen", "Transporter", 2004, 345000, "23-10-2002", "Varebil", person3);
+        Cars car4 = new Cars("Prosche", "Panamera", 2019, 50000, "30-06-2019", "Personbil", person4);
 
-        carList.addAll(List.of(new Cars[]{car1}));
+        carList.addAll(List.of(new Cars[]{car1, car2, car3, car4}));
+
+
+        personAgeList.addAll(List.of((calendar.get(Calendar.YEAR) - person1.getBirthYear()),
+                (calendar.get(Calendar.YEAR) - person2.getBirthYear()),
+                (calendar.get(Calendar.YEAR) - person3.getBirthYear()),
+                (calendar.get(Calendar.YEAR) - person4.getBirthYear())));
+
+
+        carMileageList.addAll(List.of(
+                car1.getMilage(),
+                car2.getMilage(),
+                car3.getMilage(),
+                car4.getMilage()));
+
+        carAgeList.addAll(List.of(
+                car1.getProductionYear(),
+                car2.getProductionYear(),
+                car3.getProductionYear(),
+                car4.getProductionYear()));
+
+    }
+
+    public void displayAverageAgeCar() {
+
+        OptionalDouble averageCarAge = carAgeList
+                .stream()
+                .mapToDouble(a -> a)
+                .average();
+
+        try {
+            System.out.println("Gjennomsnitt årstall: " + averageCarAge.getAsDouble());
+        }
+        catch (NoSuchElementException exception) {
+            System.out.println("Ingen biler registrert");
+        }
+    }
+
+
+    public void displayAverageMileage() {
+
+
+        OptionalDouble averageCarMileage = carMileageList
+                .stream()
+                .mapToDouble(a -> a)
+                .average();
+
+           System.out.println("Gjennomsnitt på hvor langt bilene er gått: " + averageCarMileage.getAsDouble());
+
+    }
+    public void displayAveragePerson() {
+        int averageAgePerson = (int) personAgeList.stream()
+                .mapToDouble(d -> d)
+                .average()
+                .orElse(0.0);
+
+        System.out.println("Gjennomsnitt alder på personer registrert:  " + averageAgePerson);
 
             }
 
